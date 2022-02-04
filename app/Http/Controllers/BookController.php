@@ -19,7 +19,7 @@ class BookController extends Controller
     }
 
     public function index() {
-        $books = Book::query()->get();
+        $books = Book::query()->with('genre')->get();
         dd($books);
     }
 }
