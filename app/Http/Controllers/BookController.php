@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-
-    /**
-     * @var BookService
-     */
-    private $bookService;
+    protected $bookService;
 
     public function __construct(BookService $bookService) {
         $this->bookService = $bookService;
@@ -20,6 +16,15 @@ class BookController extends Controller
 
     public function index() {
         $books = Book::query()->with('genre')->get();
-        dd($books);
+        return $books;
+    }
+
+    public function search(Request $request) {
+
+        $data = $request->all();
+        return Book::query()->with('genre')
+            ->where('name', 'like', "%" . $data['search']. "%")
+            ->orWhere('author', 'like', "%" . $data['search']. "%")
+            ->get();
     }
 }

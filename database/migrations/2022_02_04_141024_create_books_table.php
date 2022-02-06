@@ -17,6 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->integer('genre_id');
             $table->string('name');
+            $table->string('image');
             $table->integer('book_percentage');
             $table->string('author');
             $table->timestamps();
